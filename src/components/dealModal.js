@@ -34,8 +34,8 @@ export default function DealModal(props){
 
                 
                 <div className="mt-2 mb-2 bg-gray-600 rounded-full">
-                    <div class="mt-2 bg-blue-400 py-1 text-center rounded-full" style={{width: Math.round((props.deal.orders.length)/props.deal.final_votes *100) + "%"}}>
-                        <div class="text-white text-sm inline-block bg-blue-800 px-2 rounded-full">{Math.round((props.deal.orders.length)/props.deal.final_votes *100)}%</div>
+                    <div className="mt-2 bg-blue-400 py-1 text-center rounded-full" style={{width: Math.round((props.deal.orders.length)/props.deal.final_votes *100) + "%"}}>
+                        <div className="text-white text-sm inline-block bg-blue-800 px-2 rounded-full">{Math.round((props.deal.orders.length)/props.deal.final_votes *100)}%</div>
                     </div>
                 </div>
 

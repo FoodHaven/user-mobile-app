@@ -8,8 +8,11 @@ class AccountDashboard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      users: [],
-      isLoaded: false,
+      user_id: 1,
+      user: {},
+      orders: [],
+      userLoaded: false,
+      orderLoaded: false,
     }
   }
 
@@ -18,20 +21,28 @@ class AccountDashboard extends Component {
     .then(res => res.json())
     .then(json => {
       this.setState({
-        isLoaded: true,
-        users: json,
+        userLoaded: true,
+        user: json.find(user => user.id == this.state.user_id),
+      })
+    });
+    fetch('http://chenyoung01.pythonanywhere.com/outputs/orders/')
+    .then(res => res.json())
+    .then(json => {
+      this.setState({
+        orderLoaded: true,
+        orders: json.filter(order => order.user_id == this.state.user_id),
       })
     });
   }
   render(){
 
-    var {isLoaded, users} = this.state;
-    if (!isLoaded){
+    var {userLoaded, user, orderLoaded, orders} = this.state;
+    if (!userLoaded || !orderLoaded){
       return <div>
         Loading...
       </div>
     }
-    else if (isLoaded){
+    else {
   return (
     <div>
 
@@ -43,10 +54,10 @@ class AccountDashboard extends Component {
 
       <h3 className="text-xl font-semibold px-5">Personal Information</h3>
 
-    <AccountForm user={users[0]}/>
+    <AccountForm user={user}/>
     <h3 className="text-xl font-semibold px-5 mt-2">Past orders</h3>
 
-    <AccountTable user={users[0]}/>
+    <AccountTable orders={orders}/>
     </div>
     </div>
   );
