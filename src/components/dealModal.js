@@ -17,7 +17,7 @@ export default function DealModal(props){
                 {/*header*/}
                 <div className="flex items-start justify-between border-b p-3 border-solid border-gray-300 rounded-t">
                 <h3 className="text-xl font-semibold">
-                    {props.item.name}
+                    {props.deal.title}
                 </h3>
                   <button
                     className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -34,29 +34,20 @@ export default function DealModal(props){
 
                 
                 <div className="mt-2 mb-2 bg-gray-600 rounded-full">
-                    <div class="mt-2 bg-blue-400 py-1 text-center rounded-full" style={{width: (props.item.totalSpots - props.item.remainingSpots)/props.item.totalSpots *100 + "%"}}>
-                        <div class="text-white text-sm inline-block bg-blue-800 px-2 rounded-full">{(props.item.totalSpots - props.item.remainingSpots)/props.item.totalSpots *100}%</div>
+                    <div class="mt-2 bg-blue-400 py-1 text-center rounded-full" style={{width: Math.round((props.deal.orders.length)/props.deal.final_votes *100) + "%"}}>
+                        <div class="text-white text-sm inline-block bg-blue-800 px-2 rounded-full">{Math.round((props.deal.orders.length)/props.deal.final_votes *100)}%</div>
                     </div>
                 </div>
+
                   <p className="mt-4 text-gray-600 text-lg leading-relaxed">
-                    <b>{props.item.remainingSpots} more to go!</b>
+                    <b>{props.deal.final_votes - props.deal.orders.length} more to go!</b>
                   </p>
                   <p className="mt-0 text-gray-600 text-lg leading-relaxed">
-                    Price: <b>${props.item.price}</b>
+                    Price: <b>${props.deal.new_price}</b>
                   </p>
                   <p className="mt-0 text-gray-600 text-base leading-relaxed">
-                    {props.item.description}
+                    {props.deal.description}
                   </p>
-
-
-                  {/* <form class="max-w-sm px-5 mb-2 mt-2">
-                    <div class="flex items-center py-2">
-                        <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="text" value="Your Name"/>
-                    </div>
-                    <div class="flex items-center py-2">
-                        <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-full-name" type="text" value="Phone Number"/>
-                    </div>
-                </form> */}
 
                 </div>
                 
