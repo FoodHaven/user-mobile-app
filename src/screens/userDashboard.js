@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import HeaderUser from "../components/headerUser";
 import DealContent from "../components/dealContent";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 class UserDashboard extends Component {
@@ -9,7 +10,10 @@ class UserDashboard extends Component {
     super(props);
     this.state = {
       deals: [],
-      isLoaded: false,
+      dealsLoaded: false,
+      ordersLoaded: false,
+      orders: [],
+      user_id: 1,
     }
   }
 
@@ -18,21 +22,35 @@ class UserDashboard extends Component {
     .then(res => res.json())
     .then(json => {
       this.setState({
-        isLoaded: true,
+        dealsLoaded: true,
         deals: json,
       })
     });
+    fetch('http://chenyoung01.pythonanywhere.com/outputs/orders/')
+    .then(res => res.json())
+    .then(json => {
+      this.setState({
+        ordersLoaded: true,
+        orders: json.filter(order => order.user_id == this.state.user_id),
+      })
+    });
+
   }
 
   render() {
 
 
-    var {isLoaded, deals} = this.state;
-    console.log(deals)
-    if (!isLoaded){
-      return <div>
-        Loading...
-      </div>
+    var {ordersLoaded, dealsLoaded, deals, orders} = this.state;
+    // console.log(deals)
+    if (!ordersLoaded || !dealsLoaded){
+      return <div className="sweet-loading">
+      <ClipLoader
+      // css={}
+      size={50}
+      color={"#123abc"}
+      loading={this.state.loading}
+    />
+  </div>
     }
     else {
       return (
@@ -42,7 +60,7 @@ class UserDashboard extends Component {
             
             {
               deals.map(deal => (
-                <DealContent key={deal.id} deal={deal}/>
+                <DealContent key={deal.id} deal={deal} order={orders}/>
               )
               )
             }

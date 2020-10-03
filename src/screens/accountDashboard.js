@@ -2,7 +2,8 @@ import React, { useState, useEffect, Component } from "react";
 import HeaderUser from "../components/headerUser";
 import AccountTable from "../components/accountTable";
 import AccountForm from "../components/accountForm"
-
+import { bindActionCreators } from "redux";
+import ClipLoader from "react-spinners/ClipLoader";
 
 class AccountDashboard extends Component {
   constructor(props){
@@ -34,13 +35,41 @@ class AccountDashboard extends Component {
       })
     });
   }
+
+  updateUser(name, phonenumber){
+    const configObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        phonenumber,
+      })
+    }
+    const user_id = 1
+    
+      fetch("http://chenyoung01.pythonanywhere.com/users/" + user_id + "/", configObj)
+      .then(res => res.json())
+      .then(res => {
+        // alert("updated!")
+        // window.location.reload(false);
+      })
+    
+  }
+
   render(){
 
     var {userLoaded, user, orderLoaded, orders} = this.state;
     if (!userLoaded || !orderLoaded){
-      return <div>
-        Loading...
-      </div>
+      return       <div className="sweet-loading">
+        <ClipLoader
+        // css={}
+        size={50}
+        color={"#123abc"}
+        loading={this.state.loading}
+      />
+    </div>
     }
     else {
   return (
@@ -54,10 +83,13 @@ class AccountDashboard extends Component {
 
       <h3 className="text-xl font-semibold px-5">Personal Information</h3>
 
-    <AccountForm user={user}/>
+    <AccountForm user={user} updateUser={this.updateUser}/>
     <h3 className="text-xl font-semibold px-5 mt-2">Past orders</h3>
 
     <AccountTable orders={orders}/>
+    </div>
+    <div style={{height: "2vh"}}>
+
     </div>
     </div>
   );
