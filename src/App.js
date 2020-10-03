@@ -8,11 +8,8 @@ import {
 } from "react-router-dom";
 import "./styles/tailwind.css";
 
-import UserDashboard from "./screens/user/userDashboard";
-import AccountDashboard from "./screens/user/accountDashboard";
-
-// Admin
-// import Admin from "./screens/admin/admin";
+import UserDashboard from "./screens/userDashboard";
+import AccountDashboard from "./screens/accountDashboard";
 
 function App({ location }) {
   return (

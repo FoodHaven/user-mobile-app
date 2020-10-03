@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from "react";
-import HeaderUser from "../../components/header/headerUser";
-import DealContent from "../../components/userView/dealContent";
-import axios from 'axios';
+import React, { useState, useEffect, Component } from "react";
+import HeaderUser from "../components/headerUser";
+import DealContent from "../components/dealContent";
+// import axios from 'axios';
 
-// var deals = [];
-
-// axios.get('http://localhost:8000/deals/')
-// .then(function (response) {
-//   // handle success
-//   // console.log(response);
-//   deals = response.data
-//   console.log(deals)
-// })
-// .catch(function (error) {
-//   // handle error
-//   console.log(error);
-// });
 
 const sample1 = {
   name: "Crazy Sushi Deal",
@@ -41,13 +28,21 @@ const sample2 = {
   price: 10,
 };
 
-const UserDashboard = () => {
-  // const [modalIsOpen, setIsOpen] = React.useState(true);
-  // console.log(deals);
-  // const toggleModal = () => {
-  //   setIsOpen(!modalIsOpen);
-  // };
+class UserDashboard extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      items: [],
+      isLoaded: false,
+    }
+  }
+
+  componentDidMount(){
+    // fetch()
+  }
+
+  render() {
   return (
     <div>
       <HeaderUser />
@@ -60,6 +55,7 @@ const UserDashboard = () => {
       </div>
     </div>
   );
+  }
 };
 
 export default UserDashboard;

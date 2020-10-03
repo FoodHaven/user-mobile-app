@@ -1,5 +1,5 @@
 import React from "react";
-import DealModal from '../userView/dealModal';
+import DealModal from '../components/dealModal';
 
 const DealContent = (props) => {
     return (

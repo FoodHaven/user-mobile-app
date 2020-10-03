@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import HeaderUser from "../../components/header/headerUser";
-import AccountTable from "../../components/userView/accountTable";
-import AccountForm from "../../components/userView/accountForm"
+import HeaderUser from "../components/headerUser";
+import AccountTable from "../components/accountTable";
+import AccountForm from "../components/accountForm"
 
 const user = {
     name: "Ziming",
