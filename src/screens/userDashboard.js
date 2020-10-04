@@ -30,7 +30,7 @@ class UserDashboard extends Component {
   }
 
   componentDidMount(){
-    fetch('http://chenyoung01.pythonanywhere.com/outputs/deals/')
+    fetch('https://chenyoung01.pythonanywhere.com/outputs/deals/')
     .then(res => res.json())
     .then(json => {
       this.setState({
@@ -39,7 +39,7 @@ class UserDashboard extends Component {
         deals: json,
       })
     });
-    fetch('http://chenyoung01.pythonanywhere.com/outputs/orders/')
+    fetch('https://chenyoung01.pythonanywhere.com/outputs/orders/')
     .then(res => res.json())
     .then(json => {
       this.setState({
@@ -66,12 +66,12 @@ class UserDashboard extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        user: "http://chenyoung01.pythonanywhere.com/users/" + user_id + "/",
-        deal: "http://chenyoung01.pythonanywhere.com/deals/" + deal_id + "/",
+        user: "https://chenyoung01.pythonanywhere.com/users/" + user_id + "/",
+        deal: "https://chenyoung01.pythonanywhere.com/deals/" + deal_id + "/",
       })
     }
     
-      fetch("http://chenyoung01.pythonanywhere.com/orders/", configObj)
+      fetch("https://chenyoung01.pythonanywhere.com/orders/", configObj)
       .then(res => res.json())
       .then(res => {
         // console.log(res)
@@ -86,7 +86,7 @@ class UserDashboard extends Component {
     // this.handleShowModal()
     const user_id = 1
 
-      fetch("http://chenyoung01.pythonanywhere.com/orders/" + order_id, {
+      fetch("https://chenyoung01.pythonanywhere.com/orders/" + order_id, {
         method: "DELETE"
       })
       .then(res => {

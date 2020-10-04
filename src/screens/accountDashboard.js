@@ -24,7 +24,7 @@ class AccountDashboard extends Component {
   }
 
   componentDidMount(){
-    fetch('http://chenyoung01.pythonanywhere.com/users/')
+    fetch('https://chenyoung01.pythonanywhere.com/users/')
     .then(res => res.json())
     .then(json => {
       this.setState({
@@ -32,7 +32,7 @@ class AccountDashboard extends Component {
         user: json.find(user => user.id == this.state.user_id),
       })
     });
-    fetch('http://chenyoung01.pythonanywhere.com/outputs/orders/')
+    fetch('https://chenyoung01.pythonanywhere.com/outputs/orders/')
     .then(res => res.json())
     .then(json => {
       this.setState({
@@ -55,7 +55,7 @@ class AccountDashboard extends Component {
     }
     const user_id = 1
     
-      fetch("http://chenyoung01.pythonanywhere.com/users/" + user_id + "/", configObj)
+      fetch("https://chenyoung01.pythonanywhere.com/users/" + user_id + "/", configObj)
       .then(res => res.json())
       .then(res => {
 
