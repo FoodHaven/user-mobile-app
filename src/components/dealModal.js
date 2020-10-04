@@ -17,7 +17,8 @@ export default class DealModal extends Component{
   }
 
   render(){
-    console.log(this.props.orders[this.props.order])
+    // console.log(this.props.orders[this.props.order])
+    // console.log(this.props.deal)
   return (
     <>
     { this.props.order == -1 ? (this.props.deal.final_votes - this.props.deal.orders.length > 0 ?
@@ -61,18 +62,28 @@ export default class DealModal extends Component{
                     </div>
                 </div>
 
-                  <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+                  <p className="mt-4 text-gray-700 text-lg leading-relaxed">
                     <b>{this.props.deal.final_votes - this.props.deal.orders.length} more to go!</b>
                   </p>
                   {/* <p className="mt-4 text-gray-600 text-lg leading-relaxed">
                     <b>{Date.parse(this.props.deal.deadline) - Date} more to go!</b>
                   </p> */}
-                  <p className="mt-0 text-gray-600 text-lg leading-relaxed">
-                    Price: <b>${this.props.deal.new_price}</b>
-                  </p>
                   <p className="mt-0 text-gray-600 text-base leading-relaxed">
-                    {this.props.deal.description}
+                  <b>Price: </b>${this.props.deal.new_price}
                   </p>
+                  <ul >
+                  <li className="mt-0 text-gray-600 text-base leading-relaxed mr-1" style={{display: "inline"}}><b>Items:</b></li>
+                    {
+                      this.props.deal.items.map(item => (
+                      <li className="mt-0 text-gray-600 text-base leading-relaxed mx-1" style={{display: "inline"}}>{item.name}</li>
+                      ))
+                    }
+                  </ul>
+                  <p className="mt-0 text-gray-600 text-base leading-relaxed">
+                    <b>Description:</b> {this.props.deal.description}
+                  </p>
+                  
+                  
                   
                 </div>
                 
