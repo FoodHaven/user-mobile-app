@@ -8,49 +8,12 @@ export default class DealModal extends Component{
     this.state ={
       showModal: false
     }
-    this.handleConfirm = this.handleConfirm.bind(this)
   }
 
   handleShowModal = () => {
     this.setState({
       showModal: !this.state.showModal
     })
-  }
-
-  handleConfirm = () => {
-    this.handleShowModal()
-    const user_id = 1
-
-    const configObj = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        user: "http://chenyoung01.pythonanywhere.com/users/" + user_id + "/",
-        deal: "http://chenyoung01.pythonanywhere.com/deals/" + this.props.deal.id + "/",
-      })
-    }
-    
-      fetch("http://chenyoung01.pythonanywhere.com/orders/", configObj)
-      .then(res => res.json())
-      .then(res => {
-        // console.log(res)
-        window.location.reload(false);
-      })
-    
-
-  }
-
-  handleUnconfirm = () => {
-    this.handleShowModal()
-    const user_id = 1
-
-      fetch("http://chenyoung01.pythonanywhere.com/orders/" + this.props.orders[this.props.order].id, {
-        method: "DELETE"
-      })
-      .then(res => window.location.reload(false))
-    
   }
 
   render(){
@@ -110,7 +73,7 @@ export default class DealModal extends Component{
                   <p className="mt-0 text-gray-600 text-base leading-relaxed">
                     {this.props.deal.description}
                   </p>
-
+                  
                 </div>
                 
 
@@ -120,12 +83,18 @@ export default class DealModal extends Component{
                   {this.props.order == -1 ?  
                   (<button
                     className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                    onClick={this.handleConfirm}
+                    onClick={() => {
+                      this.handleShowModal();
+                      this.props.handleConfirm(this.props.deal.id);
+                    }}
                   >
                     Confirm  </button>) :
                     (<button
                       className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
-                      onClick={this.handleUnconfirm}
+                      onClick={() => {
+                        this.handleShowModal();
+                        this.props.handleUnconfirm(this.props.orders[this.props.order].id);
+                      }}
                     >
                       Unconfirm  </button>)
                  

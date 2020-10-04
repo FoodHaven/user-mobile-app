@@ -19,7 +19,7 @@ const DealContent = (props) => {
       </div>
         <div className="flex items-center justify-between pt-1 pb-2 px-3 bg-gray-400">
         <h1 className="text-gray-700 font-bold ">{props.deal.final_votes - props.deal.orders.length} needed!</h1>
-        <DealModal deal={props.deal} order={props.order.findIndex(order => order.deal_id == props.deal.id)} orders={props.order}/>
+        <DealModal deal={props.deal} order={props.order.findIndex(order => order.deal_id == props.deal.id)} orders={props.order} handleConfirm={props.handleConfirm} handleUnconfirm={props.handleUnconfirm}/>
       </div>
       </div>
     </div>

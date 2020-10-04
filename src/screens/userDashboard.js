@@ -23,6 +23,10 @@ class UserDashboard extends Component {
       user_id: 1,
     }
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleConfirm = this.handleConfirm.bind(this)
+    this.handleUnconfirm = this.handleUnconfirm.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+
   }
 
   componentDidMount(){
@@ -48,8 +52,50 @@ class UserDashboard extends Component {
 
   handleSearch(name){
     this.setState({
-      deals: this.state.all_deals.filter(deal => deal.restaurant_name.includes(name))
+      deals: this.state.all_deals.filter(deal => deal.restaurant_name.toLowerCase().includes(name.toLowerCase()))
     })
+  }
+
+  handleConfirm = (deal_id) => {
+    // this.handleShowModal()
+    const user_id = 1
+
+    const configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        user: "http://chenyoung01.pythonanywhere.com/users/" + user_id + "/",
+        deal: "http://chenyoung01.pythonanywhere.com/deals/" + deal_id + "/",
+      })
+    }
+    
+      fetch("http://chenyoung01.pythonanywhere.com/orders/", configObj)
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res)
+        this.setState({
+          dealsLoaded: false,
+        });
+        this.componentDidMount()
+      })
+  }
+
+  handleUnconfirm = (order_id) => {
+    // this.handleShowModal()
+    const user_id = 1
+
+      fetch("http://chenyoung01.pythonanywhere.com/orders/" + order_id, {
+        method: "DELETE"
+      })
+      .then(res => {
+        this.setState({
+          dealsLoaded: false,
+        });
+        this.componentDidMount()
+      })
+    
   }
 
   render() {
@@ -80,7 +126,7 @@ class UserDashboard extends Component {
             
             {
               deals.map(deal => (
-                <DealContent key={deal.id} deal={deal} order={orders} />
+                <DealContent key={deal.id} deal={deal} order={orders} handleConfirm={this.handleConfirm} handleUnconfirm={this.handleUnconfirm}/>
               )
               )
             }
