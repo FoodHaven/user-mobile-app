@@ -3,7 +3,13 @@ import HeaderUser from "../components/headerUser";
 import AccountTable from "../components/accountTable";
 import AccountForm from "../components/accountForm"
 import { bindActionCreators } from "redux";
+import { css } from "@emotion/core";
 import ClipLoader from "react-spinners/ClipLoader";
+
+const override = css`
+  display: block;
+  margin: 50% auto;
+`;
 
 class AccountDashboard extends Component {
   constructor(props){
@@ -61,14 +67,18 @@ class AccountDashboard extends Component {
 
     var {userLoaded, user, orderLoaded, orders} = this.state;
     if (!userLoaded || !orderLoaded){
-      return       <div className="sweet-loading">
+      return  (
+      <>
+      <HeaderUser />
+      <div className="sweet-loading">
         <ClipLoader
-        // css={}
+        css={override}
         size={50}
         color={"#123abc"}
         loading={this.state.loading}
       />
     </div>
+    </>)
     }
     else {
   return (

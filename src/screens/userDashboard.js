@@ -3,6 +3,12 @@ import HeaderUser from "../components/headerUser";
 import DealContent from "../components/dealContent";
 import ClipLoader from "react-spinners/ClipLoader";
 import DealSearch from "../components/dealSearch";
+import { css } from "@emotion/core";
+
+const override = css`
+  display: block;
+  margin: 50% auto;
+`;
 
 class UserDashboard extends Component {
 
@@ -52,14 +58,18 @@ class UserDashboard extends Component {
     var {ordersLoaded, dealsLoaded, deals, orders} = this.state;
     // console.log(deals)
     if (!ordersLoaded || !dealsLoaded){
-      return <div className="sweet-loading">
-      <ClipLoader
-      // css={}
-      size={50}
-      color={"#123abc"}
-      loading={this.state.loading}
-    />
-  </div>
+      return  (
+        <>
+        <HeaderUser />
+        <div className="sweet-loading">
+          <ClipLoader
+          css={override}
+          size={50}
+          color={"#123abc"}
+          loading={this.state.loading}
+        />
+      </div>
+      </>)
     }
     else {
       return (

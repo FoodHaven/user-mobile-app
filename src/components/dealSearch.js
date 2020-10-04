@@ -6,6 +6,8 @@ export default class DealSearch extends Component{
     }
     render(){
         return (
+            <div className="flex flex-col justify-center items-center max-w-lg mx-auto"
+            style={{ width: "100vw"}}>
             <div className="p-8">
   <div className="bg-white flex items-center rounded-full shadow-xl">
     <input id="search_bar" className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"  type="text" placeholder="Search Restaurant" onChange={() => this.props.handleSearch(document.getElementById('search_bar').value)}/>
@@ -18,7 +20,7 @@ export default class DealSearch extends Component{
       </button>
       </div>
     </div>
-  </div>
+  </div></div>
 
         )
     }

@@ -101,6 +101,9 @@ export default class DealModal extends Component{
                   <p className="mt-4 text-gray-600 text-lg leading-relaxed">
                     <b>{this.props.deal.final_votes - this.props.deal.orders.length} more to go!</b>
                   </p>
+                  {/* <p className="mt-4 text-gray-600 text-lg leading-relaxed">
+                    <b>{Date.parse(this.props.deal.deadline) - Date} more to go!</b>
+                  </p> */}
                   <p className="mt-0 text-gray-600 text-lg leading-relaxed">
                     Price: <b>${this.props.deal.new_price}</b>
                   </p>
