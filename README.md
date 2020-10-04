@@ -1,4 +1,4 @@
-The project was the mobile-view application for Food Haven, a project for Ivy Hack. 
+The project is the mobile-view application for Food Haven, a project for Ivy Hack. 
 
 ## Steps
 
