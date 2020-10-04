@@ -4,7 +4,7 @@ This is the mobile-view application for Food Haven, a project under Ivy Hack tha
 
 To install dependencies and packages, run:
 
-### 'npm install -r requirements.txt 
+### `npm install -r requirements.txt`
 
 In the project directory, you can run:
 
