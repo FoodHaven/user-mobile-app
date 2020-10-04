@@ -22,8 +22,8 @@ export default class DealModal extends Component{
   return (
     <>
     { this.props.order == -1 ? (this.props.deal.final_votes - this.props.deal.orders.length > 0 ?
-    (<button className="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-gray-700" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal}>Join!</button>) : (<button className="bg-red-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-gray-700" style={{ transition: "all .15s ease" }}>Full</button>))
-    : (<button className="bg-green-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-red-700 cursor-not-allowed" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal} >Joined</button>)
+    (<button className="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-gray-700" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal}>Join!</button>) : (<button className="bg-red-800 text-xs text-white px-2 py-1 font-semibold rounded " style={{ transition: "all .15s ease" }}>Full</button>))
+    : (<button className="bg-green-800 text-xs text-white px-2 py-1 font-semibold rounded cursor-not-allowed" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal} >Joined</button>)
   }
 
       {this.state.showModal ? (
