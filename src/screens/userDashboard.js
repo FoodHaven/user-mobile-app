@@ -124,7 +124,7 @@ class UserDashboard extends Component {
           <DealSearch handleSearch={this.handleSearch}/>
           <div className="grid gap-1">
             {
-              deals.reverse().map(deal => (
+              deals.map(deal => (
                 <DealContent key={deal.id} deal={deal} order={orders} handleConfirm={this.handleConfirm} handleUnconfirm={this.handleUnconfirm}/>
               )
               )

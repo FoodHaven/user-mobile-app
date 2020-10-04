@@ -15,7 +15,7 @@ const HeaderLink = (props) => {
 const HeaderUser = () => {
   return (
     <div className="flex items-center flex-row pl-5 p-8 shadow-md bg-gray-800 text-gray-100">
-      <img src="/logo.png" style={{width: "13vw"}}></img>
+      <img src="/logo.png" style={{width: "45px"}}></img>
       <div className="text-xl ml-3 mr-8">Food Haven</div>
       <HeaderLink text="Deals" link="deals"/>
       <HeaderLink text="Account" link="account" />
