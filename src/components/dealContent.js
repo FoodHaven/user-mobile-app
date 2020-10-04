@@ -2,7 +2,7 @@ import React from "react";
 import DealModal from '../components/dealModal';
 
 const DealContent = (props) => {
-    console.log(props.order)
+    // console.log(props.order)
     return (
       <div
       className="flex flex-col justify-center items-center max-w-lg mx-auto"
@@ -19,7 +19,7 @@ const DealContent = (props) => {
       </div>
         <div className="flex items-center justify-between pt-1 pb-2 px-3 bg-gray-400">
         <h1 className="text-gray-700 font-bold ">{props.deal.final_votes - props.deal.orders.length} needed!</h1>
-        <DealModal deal={props.deal} order={props.order.findIndex(order => order.deal_id == props.deal.id)}/>
+        <DealModal deal={props.deal} order={props.order.findIndex(order => order.deal_id == props.deal.id)} orders={props.order}/>
       </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ export default class DealModal extends Component{
     this.state ={
       showModal: false
     }
+    this.handleConfirm = this.handleConfirm.bind(this)
   }
 
   handleShowModal = () => {
@@ -30,23 +31,35 @@ export default class DealModal extends Component{
         deal: "http://chenyoung01.pythonanywhere.com/deals/" + this.props.deal.id + "/",
       })
     }
-    if (this.props.deal.final_votes - this.props.deal.orders.length > 0){
+    
       fetch("http://chenyoung01.pythonanywhere.com/orders/", configObj)
       .then(res => res.json())
       .then(res => {
         // console.log(res)
         window.location.reload(false);
       })
-    }
+    
 
   }
 
+  handleUnconfirm = () => {
+    this.handleShowModal()
+    const user_id = 1
+
+      fetch("http://chenyoung01.pythonanywhere.com/orders/" + this.props.orders[this.props.order].id, {
+        method: "DELETE"
+      })
+      .then(res => window.location.reload(false))
+    
+  }
+
   render(){
+    console.log(this.props.orders[this.props.order])
   return (
     <>
-    { this.props.order == -1 ? (
-    <button className="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-gray-700" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal}>Join!</button>)
-    : (<button className="bg-red-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-red-700 cursor-not-allowed" style={{ transition: "all .15s ease" }} >Joined</button>)
+    { this.props.order == -1 ? (this.props.deal.final_votes - this.props.deal.orders.length > 0 ?
+    (<button className="bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-gray-700" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal}>Join!</button>) : (<button className="bg-red-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-gray-700" style={{ transition: "all .15s ease" }}>Full</button>))
+    : (<button className="bg-green-800 text-xs text-white px-2 py-1 font-semibold rounded hover:bg-red-700 cursor-not-allowed" style={{ transition: "all .15s ease" }} onClick={this.handleShowModal} >Joined</button>)
   }
 
       {this.state.showModal ? (
@@ -78,7 +91,10 @@ export default class DealModal extends Component{
                 
                 <div className="mt-2 mb-2 bg-gray-600 rounded-full">
                     <div className="mt-2 bg-blue-400 py-1 text-center rounded-full" style={{width: Math.round((this.props.deal.orders.length)/this.props.deal.final_votes *100) + "%"}}>
-                        <div className="text-white text-sm inline-block bg-blue-800 px-2 rounded-full">{Math.round((this.props.deal.orders.length)/this.props.deal.final_votes *100)}%</div>
+                      {
+                        Math.round((this.props.deal.orders.length)/this.props.deal.final_votes *100) > 10 ?
+                        (<div className="text-white text-sm inline-block bg-blue-800 px-2 rounded-full">{Math.round((this.props.deal.orders.length)/this.props.deal.final_votes *100)}%</div>) : (<div className="text-white text-sm inline-block bg-blue-800 px-2 rounded-full"></div>)
+                      }
                     </div>
                 </div>
 
@@ -97,12 +113,20 @@ export default class DealModal extends Component{
 
                 {/*footer*/}
                 <div className="flex items-center justify-end p-2 border-t border-solid border-gray-300 rounded-b">
-                  <button
+
+                  {this.props.order == -1 ?  
+                  (<button
                     className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
                     onClick={this.handleConfirm}
                   >
-                    Confirm
-                  </button>
+                    Confirm  </button>) :
+                    (<button
+                      className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-1 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                      onClick={this.handleUnconfirm}
+                    >
+                      Unconfirm  </button>)
+                 
+                  }
                 </div>
               </div>
             </div>

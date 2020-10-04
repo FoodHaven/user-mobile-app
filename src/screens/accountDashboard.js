@@ -52,8 +52,7 @@ class AccountDashboard extends Component {
       fetch("http://chenyoung01.pythonanywhere.com/users/" + user_id + "/", configObj)
       .then(res => res.json())
       .then(res => {
-        // alert("updated!")
-        // window.location.reload(false);
+
       })
     
   }

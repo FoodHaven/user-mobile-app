@@ -2,19 +2,21 @@ import React, { useState, useEffect, Component } from "react";
 import HeaderUser from "../components/headerUser";
 import DealContent from "../components/dealContent";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import DealSearch from "../components/dealSearch";
 
 class UserDashboard extends Component {
 
   constructor(props){
     super(props);
     this.state = {
+      all_deals: [],
       deals: [],
       dealsLoaded: false,
       ordersLoaded: false,
       orders: [],
       user_id: 1,
     }
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount(){
@@ -22,6 +24,7 @@ class UserDashboard extends Component {
     .then(res => res.json())
     .then(json => {
       this.setState({
+        all_deals: json,
         dealsLoaded: true,
         deals: json,
       })
@@ -35,6 +38,12 @@ class UserDashboard extends Component {
       })
     });
 
+  }
+
+  handleSearch(name){
+    this.setState({
+      deals: this.state.all_deals.filter(deal => deal.restaurant_name.includes(name))
+    })
   }
 
   render() {
@@ -56,11 +65,12 @@ class UserDashboard extends Component {
       return (
         <div>
           <HeaderUser />
+          <DealSearch handleSearch={this.handleSearch}/>
           <div className="grid gap-1">
             
             {
               deals.map(deal => (
-                <DealContent key={deal.id} deal={deal} order={orders}/>
+                <DealContent key={deal.id} deal={deal} order={orders} />
               )
               )
             }
